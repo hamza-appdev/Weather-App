@@ -1,5 +1,6 @@
 package com.example.weatherapp.presentation
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -26,11 +27,15 @@ class WeatherViewModel(): ViewModel() {
         viewModelScope.launch {
            val response = getweatherapi.getweather(Constant.apikey,city)
             try {
+                Log.d("Tagggggggg","Successfully ftech")
+                Log.d("Tagggggggg", "API key: ${Constant.apikey}, City: $city")
+
                 if (response.isSuccessful){
                     response.body()?.let {
                         _weatherresut.value = Resultt.Success(it)
                     }
                 }else{
+                    Log.d("Tagggggggg","Error ftech")
                     _weatherresut.value = Resultt.Error("Failed to Loard Data${response.message()}")
                 }
             }catch (e: Exception){

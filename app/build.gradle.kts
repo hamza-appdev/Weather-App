@@ -1,9 +1,22 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
+    val secretProps = Properties()
+    val secretFile = File(rootDir, "secret.properties")
 
+    if (secretFile.exists() && secretFile.isFile) {
+        secretFile.inputStream().use { stream ->
+            secretProps.load(stream)
+        }
+    } else {
+        println("⚠️ secret.properties file not found!")
+    }
+
+    val apiKey: String = secretProps.getProperty("API_KEY") ?: ""
 android {
     namespace = "com.example.weatherapp"
     compileSdk = 36
@@ -15,8 +28,14 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        buildConfigField("String", "API_KEY", "\"$apiKey\"")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+
+
+
 
     buildTypes {
         release {
@@ -26,6 +45,9 @@ android {
                 "proguard-rules.pro"
             )
         }
+//        debug {
+//            buildConfigField("String", "Api_Key", "\"${secretProps .getProperty("Api_Key") ?: ""}\"")
+//        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -36,6 +58,8 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig=true
+        resValues=true
     }
 }
 
