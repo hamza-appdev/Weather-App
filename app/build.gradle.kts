@@ -5,18 +5,18 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
-    val secretProps = Properties()
-    val secretFile = File(rootDir, "secret.properties")
+    val secretProps = Properties() //khali object banya ga
+    val secretFile = File(rootDir, "secret.properties") //ya file ke location batya ga
 
     if (secretFile.exists() && secretFile.isFile) {
         secretFile.inputStream().use { stream ->
-            secretProps.load(stream)
+            secretProps.load(stream) //ya data ko load kary ga secretprops ma
         }
     } else {
-        println("⚠️ secret.properties file not found!")
+        println("⚠️ secret.properties file not found!") //warna error
     }
 
-    val apiKey: String = secretProps.getProperty("API_KEY") ?: ""
+    val apiKey: String = secretProps.getProperty("API_KEY") ?: "" //secret file sy apikey, ke value nikly gi
 android {
     namespace = "com.example.weatherapp"
     compileSdk = 36
@@ -28,6 +28,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        //ya ak constant generate kary ga BuildConfig file ma
         buildConfigField("String", "API_KEY", "\"$apiKey\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
