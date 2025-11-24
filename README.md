@@ -33,6 +33,19 @@ This app fetches real-time weather data from a REST API (like OpenWeatherMap) an
 <br><br>
 <img width="250" alt="Screenshot_20251001_183832" src="https://github.com/user-attachments/assets/febbf813-2bcb-4c08-87b6-eebc2d58e132" />
 <img width="250" alt="Screenshot_20251001_183928" src="https://github.com/user-attachments/assets/0019a98d-d01d-43d2-b7b0-82e7d4bdf472" />
+---
+
+### Add API key (recommended approaches)
+- An API key from your weather provider (e.g., OpenWeatherMap, WeatherAPI, etc.)
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/yourusername/WeatherApp.git
+```
 
 
 
